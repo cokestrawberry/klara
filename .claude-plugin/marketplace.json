@@ -2,7 +2,7 @@
   "name": "klara",
   "description": "Wording rules for Claude Code, checked against references instead of intuition",
   "owner": {
-    "name": "<본인 이름>"
+    "name": "cokestrawberry"
   },
   "plugins": [
     {
