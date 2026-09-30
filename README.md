@@ -27,6 +27,17 @@ claude plugin disable klara@klara
 
 In a Claude Code session that is already running, run `/reload-plugins` to apply the change.
 
+## How to use
+
+There is no command to run or style to select. After you install the plugin, use Claude Code as
+usual; Claude's responses follow the rules below.
+
+The style applies to the main conversation and to a
+[fork](https://code.claude.com/docs/en/sub-agents#fork-the-current-conversation), a subagent that
+starts with the whole conversation so far. Other subagents
+[run their own system prompt](https://code.claude.com/docs/en/output-styles#how-output-styles-work),
+so text they write does not follow the rules.
+
 ## Rules
 
 - **Wording from references.** Claude takes terms and phrasing from the references above, and
