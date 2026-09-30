@@ -84,6 +84,18 @@ usage is not treated as a problem.
 
 The full rules are in [language-and-tone.md](plugins/klara/output-styles/language-and-tone.md).
 
+## Examples
+
+Each row is an observed case in the rules and has an eval case in
+[plugins/klara/evals](plugins/klara/evals).
+
+| Draft wording | What the agent writes | Why |
+| --- | --- | --- |
+| 잡, 윈도우 | 작업, 구간 | A plain Korean word instead of a transliteration |
+| 나이틀리, 스텁, 어서션 | nightly, stub, assertion | No Korean word, so the English spelling |
+| cutover for a routine deployment | 배포 | No reference defines the term for this meaning |
+| 변수의 은퇴 | The action, such as removing an unused variable | 은퇴 is not used in that sense |
+
 ## Evaluate
 
 The cases in [plugins/klara/evals](plugins/klara/evals) score the style with
