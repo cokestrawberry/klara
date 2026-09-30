@@ -1,6 +1,6 @@
 # klara
 
-A plugin for Claude Code and Codex that makes the agent write the way people do, choosing wording
+Humanize plugin for Claude Code and Codex that makes the agent write the way people do, choosing wording
 from [references](#references) instead of intuition.
 
 Named after the observant robot in *[Klara and the Sun](https://en.wikipedia.org/wiki/Klara_and_the_Sun)*.
