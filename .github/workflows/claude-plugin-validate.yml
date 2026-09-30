@@ -1,10 +1,10 @@
-name: plugin-validate
+name: claude-plugin-validate
 
 on:
   pull_request:
 
 jobs:
-  plugin-validate:
+  claude-plugin-validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
