@@ -8,7 +8,7 @@
     {
       "name": "klara",
       "source": "./plugins/klara",
-      "description": "Korean and English wording rules"
+      "description": "Korean and English wording rules as an output style"
     }
   ]
 }
