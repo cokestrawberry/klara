@@ -86,15 +86,23 @@ The full rules are in [language-and-tone.md](plugins/klara/output-styles/languag
 
 ## Examples
 
-Each row is an observed case in the rules and has an eval case in
+The rules record every case below, and each has an eval case in
 [plugins/klara/evals](plugins/klara/evals).
 
-| Draft wording | Replacement in the rules | Why |
+The rules record these replacements:
+
+| Draft wording | Replacement | Why |
 | --- | --- | --- |
 | 잡, 윈도우 | 작업, 구간 | A plain Korean word instead of a transliteration |
 | 나이틀리, 스텁, 어서션 | nightly, stub, assertion | No Korean word, so the English spelling |
-| cutover (routine deployment) | The plain phrase for what is happening | Undefined in that sense |
-| 변수의 은퇴 | Name the action | 은퇴 is not used in that sense |
+
+For these two, the rules record only the principle. The rewrites are illustrations of it,
+not output the eval checked:
+
+| Draft wording | Example rewrite | Why |
+| --- | --- | --- |
+| 정기 배포 cutover 진행 예정 | 정기 배포 진행 예정 | A term of art needs a defining reference |
+| 사용하지 않는 `legacyMode` 변수 은퇴 | 사용하지 않는 `legacyMode` 변수 삭제 | 은퇴 is not used in that sense |
 
 ## Evaluate
 
