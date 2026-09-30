@@ -12,26 +12,38 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
-      # Start the hook the way Codex does: `$SHELL -lc <command>` on Unix, and on Windows
-      # `%COMSPEC% /C "<command>"` with `commandWindows` in place of `command` when it is set.
+      # Start the hook the way Codex does: `$SHELL -lc <command>` on Unix. On Windows it runs
+      # `commandWindows` (else `command`) with `%COMSPEC% /C "<command>"` when no hook shell is
+      # set, and with the configured shell otherwise, which can be PowerShell `-NoProfile -Command`.
       - shell: pwsh
         run: |
           $hook = (Get-Content plugins/klara/.codex-plugin/plugin.json -Raw | ConvertFrom-Json).hooks.hooks.SessionStart[0].hooks[0]
           $env:PLUGIN_ROOT = Join-Path $PWD plugins/klara
           if ($IsWindows) {
-            $start = [Diagnostics.ProcessStartInfo]::new($env:ComSpec, "/C `"$($hook.commandWindows ?? $hook.command)`"")
+            $command = $hook.commandWindows ?? $hook.command
+            $starts = @([Diagnostics.ProcessStartInfo]::new($env:ComSpec, "/C `"$command`""))
+            foreach ($shell in 'powershell.exe', 'pwsh') {
+              $start = [Diagnostics.ProcessStartInfo]::new($shell)
+              $start.ArgumentList.Add('-NoProfile')
+              $start.ArgumentList.Add('-Command')
+              $start.ArgumentList.Add($command)
+              $starts += $start
+            }
           } else {
             $start = [Diagnostics.ProcessStartInfo]::new($env:SHELL ?? '/bin/sh')
             $start.ArgumentList.Add('-lc')
             $start.ArgumentList.Add($hook.command)
+            $starts = , $start
           }
-          $start.RedirectStandardOutput = $true
-          $start.StandardOutputEncoding = [Text.UTF8Encoding]::new($false)
-          $process = [Diagnostics.Process]::Start($start)
-          $output = $process.StandardOutput.ReadToEnd()
-          $process.WaitForExit()
           $body = ((Get-Content plugins/klara/output-styles/language-and-tone.md -Raw) -split '(?m)^---\r?$', 3)[2]
-          if ($process.ExitCode -ne 0 -or ($output -replace "`r").Trim() -ne ($body -replace "`r").Trim()) {
-            Write-Output "exit code $($process.ExitCode)" $output
-            exit 1
+          foreach ($start in $starts) {
+            $start.RedirectStandardOutput = $true
+            $start.StandardOutputEncoding = [Text.UTF8Encoding]::new($false)
+            $process = [Diagnostics.Process]::Start($start)
+            $output = $process.StandardOutput.ReadToEnd()
+            $process.WaitForExit()
+            if ($process.ExitCode -ne 0 -or ($output -replace "`r").Trim() -ne ($body -replace "`r").Trim()) {
+              Write-Output "$($start.FileName) exit code $($process.ExitCode)" $output
+              exit 1
+            }
           }

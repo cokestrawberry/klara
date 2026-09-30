@@ -10,7 +10,7 @@
             {
               "type": "command",
               "command": "sed '1,/^---$/d' \"$PLUGIN_ROOT/output-styles/language-and-tone.md\"",
-              "commandWindows": "powershell -NoProfile -Command \"$l = [IO.File]::ReadAllLines((Join-Path $env:PLUGIN_ROOT 'output-styles/language-and-tone.md')); $b = [Text.Encoding]::UTF8.GetBytes($l[([Array]::IndexOf($l, '---', 1) + 1)..($l.Length - 1)] -join [char]10); [Console]::OpenStandardOutput().Write($b, 0, $b.Length)\""
+              "commandWindows": "powershell -NoProfile -Command \"[Console]::OutputEncoding = [Text.Encoding]::UTF8; [Console]::Out.Write(([IO.File]::ReadAllText([IO.Path]::Combine([Environment]::GetEnvironmentVariable('PLUGIN_ROOT'), 'output-styles', 'language-and-tone.md')) -split '(?m)^---\\r?\\n', 3)[2] -replace '\\r')\""
             }
           ]
         }
