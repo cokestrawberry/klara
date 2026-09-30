@@ -148,7 +148,7 @@ Python function. Each task ran twice under each condition:
 Each value is the median of the two runs. Input counts every input token of the run, cached or
 not.
 
-### Claude Code
+### Claude Code measurements
 
 | Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -164,7 +164,7 @@ not.
 
 No run looked anything up under any condition.
 
-### Codex
+### Codex measurements
 
 | Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 | Requests 2 | Requests 3 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
