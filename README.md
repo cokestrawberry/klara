@@ -1,11 +1,13 @@
 # klara
 
-A Claude Code plugin that provides one output style. The style makes Claude write the way people
-do, choosing wording from [references](#references) instead of intuition.
+A plugin for Claude Code and Codex that makes the agent write the way people do, choosing wording
+from [references](#references) instead of intuition.
 
 Named after the observant robot in *[Klara and the Sun](https://en.wikipedia.org/wiki/Klara_and_the_Sun)*.
 
 ## Install
+
+### Claude Code
 
 ```sh
 claude plugin marketplace add cokestrawberry/klara
@@ -24,16 +26,31 @@ claude plugin disable klara@klara
 
 In a Claude Code session that is already running, run `/reload-plugins` to apply the change.
 
+### Codex
+
+```sh
+codex plugin marketplace add cokestrawberry/klara
+codex plugin add klara@klara
+```
+
+The plugin adds the rules through a [`SessionStart` hook](https://learn.chatgpt.com/docs/hooks),
+and Codex skips a plugin's hooks until you trust them. In Codex CLI, open `/hooks`, review the
+klara hook, and trust it; the rules apply from the next session. To turn them off, open `/plugins`
+and press Space on klara. The IDE extension does not support plugins.
+
 ## How to use
 
-There is no command to run. Once the style applies as described in [Install](#install), use
-Claude Code as usual; Claude's responses follow the rules below.
+There is no command to run. Once the rules apply as described in [Install](#install), use
+Claude Code or Codex as usual; the agent's responses follow the rules below.
 
-The style applies to the main conversation and to a
+In Claude Code, the style applies to the main conversation and to a
 [fork](https://code.claude.com/docs/en/sub-agents#fork-the-current-conversation), a subagent that
 starts with the whole conversation so far. Other subagents
 [run their own system prompt](https://code.claude.com/docs/en/output-styles#how-output-styles-work),
 so text they write does not follow the rules.
+
+In Codex, the hook adds the rules as developer context when a session starts, resumes, is
+cleared, or is compacted. It does not run for subagents, which start with `SubagentStart` instead.
 
 ## References
 
@@ -55,14 +72,14 @@ usage is not treated as a problem.
 
 ## Rules
 
-- **Wording from references.** Claude takes terms and phrasing from the references above, and
+- **Wording from references.** The agent takes terms and phrasing from the references above, and
   writes a plain Korean word instead of a transliteration, or the English spelling when there is
   none. Text in your repository and on its PRs, issues, and commits is not a basis for wording,
   because who wrote it cannot be verified.
-- **Shapes to avoid.** Claude avoids sentence shapes that mark text as generated and have been
+- **Shapes to avoid.** The agent avoids sentence shapes that mark text as generated and have been
   flagged more than once, such as cleft constructions ("~하는 것은 ~입니다"), announcing a count
   before a list, invented metaphors, and literal translations ("~에서 왔습니다" for "came from").
-- **Check before sending.** Claude runs these checks on the finished text, in chat answers as
+- **Check before sending.** The agent runs these checks on the finished text, in chat answers as
   much as in anything committed or posted.
 
 The full rules are in [language-and-tone.md](plugins/klara/output-styles/language-and-tone.md).
