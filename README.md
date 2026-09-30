@@ -183,6 +183,20 @@ condition 3, every shell command that fetched a URL failed to connect. Turning w
 removes the web search tool from the request, so condition 3 differs from condition 2 by more than
 the requests.
 
+### Codex hook on later turns
+
+This was measured once in an interactive Codex session on 2026-10-01, sending `ok` after each
+step:
+
+| Step before `ok` | Rules added | Input |
+| --- | --- | ---: |
+| Start `codex` | Yes | 14,813 |
+| `/compact` | Yes | 14,903 |
+| `/clear` | Yes | 14,813 |
+| Quit, then `codex resume --last` | Yes, and the earlier copy stays | 15,773 |
+
+The session log reports no tokens for the `/compact` step itself, so the table leaves it out.
+
 ### Measure again
 
 ```powershell
