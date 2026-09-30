@@ -41,8 +41,8 @@ so text they write does not follow the rules.
 | --- | --- | --- |
 | Defining an IT term | [TTA 정보통신용어사전][tta] | [SEVOCAB][sevocab] |
 | A term specific to one technology | Its official documentation | Its official documentation |
-| Meaning of a general word | [표준국어대사전][stdict] | [Oxford Advanced Learner's Dictionary][oald] |
-| Usage of a general word or phrase | [우리말샘][opendict] | Example sentences in [Oxford][oald] |
+| Meaning of a general word | [표준국어대사전][stdict] | [Oxford Advanced American Dictionary][oaad] |
+| Usage of a general word or phrase | [우리말샘][opendict] | Example sentences in [Oxford][oaad] |
 
 SEVOCAB covers software and systems engineering terms. English follows American usage; British
 usage is not treated as a problem.
@@ -51,7 +51,7 @@ usage is not treated as a problem.
 [sevocab]: https://pascal.computer.org
 [stdict]: https://stdict.korean.go.kr
 [opendict]: https://opendict.korean.go.kr
-[oald]: https://www.oxfordlearnersdictionaries.com
+[oaad]: https://www.oxfordlearnersdictionaries.com/us/
 
 ## Rules
 

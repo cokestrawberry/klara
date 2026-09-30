@@ -31,7 +31,8 @@ confirmed by me and override any reference.
   sense there, name the action instead; a dead metaphor in English revives in translation and
   obscures the point. (observed: "변수의 은퇴" for retiring an unused variable)
 - For a general English word, collocation, or figure of speech, check the definition and the
-  example sentences in the Oxford Advanced Learner's Dictionary (oxfordlearnersdictionaries.com).
+  example sentences in the Oxford Advanced American Dictionary
+  (`oxfordlearnersdictionaries.com/definition/american_english/<word>`).
 - American usage is the baseline for English. A word, spelling, or phrase that a reference marks
   as British is not a problem and needs no change.
 - If WebFetch is refused, fetch the reference with curl. If a reference still cannot be reached,
