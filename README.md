@@ -164,6 +164,10 @@ not.
 
 No run looked anything up under any condition.
 
+`claude plugin details klara` reports `~0 tok` added to every session, and `/context` has no row
+for the output style, so neither shows what the rules add. The figures above come from the token
+counts the API returned for each run.
+
 ### Codex measurements
 
 | Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 | Requests 2 | Requests 3 |
