@@ -18,9 +18,9 @@ confirmed by me and override any reference.
 
 - In either language, use a term of art only when a reference defines it with the meaning of what
   is actually happening: for IT terms, TTA 정보통신용어사전 (terms.tta.or.kr) in Korean and SEVOCAB
-  (pascal.computer.org) in English, or the official documentation of the technology in question
-  for its own terms. Otherwise write the plain phrase for what is happening. (observed: `cutover`
-  for a routine deployment)
+  in English (`pascal.computer.org/sev_display/search.action?term=<term>`), or the official
+  documentation of the technology in question for its own terms. Otherwise write the plain phrase
+  for what is happening. (observed: `cutover` for a routine deployment)
 - Instead of a transliteration, use a plain Korean word with the same meaning: for an IT term as
   TTA 정보통신용어사전 gives it, for a general word as 표준국어대사전 gives it. When there is none,
   use the English spelling. (observed: 잡 → 작업, 윈도우 → 구간; 나이틀리 → nightly, 스텁 → stub,
