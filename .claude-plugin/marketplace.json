@@ -1,6 +1,6 @@
 {
   "name": "klara",
-  "description": "Wording rules for Claude Code, checked against references instead of intuition",
+  "description": "Wording rules for Claude Code and Codex, checked against references instead of intuition",
   "owner": {
     "name": "cokestrawberry"
   },
@@ -8,7 +8,7 @@
     {
       "name": "klara",
       "source": "./plugins/klara",
-      "description": "Korean and English wording rules as an output style"
+      "description": "Korean and English wording rules"
     }
   ]
 }
