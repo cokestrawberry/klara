@@ -5,6 +5,8 @@ from [references](#references) instead of intuition.
 
 Named after the observant robot in *[Klara and the Sun](https://en.wikipedia.org/wiki/Klara_and_the_Sun)*.
 
+You can support klara through [GitHub Sponsors](https://github.com/sponsors/cokestrawberry).
+
 ## Install
 
 ### Claude Code
