@@ -104,3 +104,7 @@ claude plugin eval plugins/klara --no-publish --allow-tools Bash Write \
 ```
 
 Results are written to `plugins/klara/evals/results/`.
+
+## Sponsor
+
+You can support klara through [GitHub Sponsors](https://github.com/sponsors/cokestrawberry).
