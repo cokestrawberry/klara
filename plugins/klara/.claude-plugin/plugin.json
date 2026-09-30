@@ -5,5 +5,8 @@
   "author": {
     "name": "<본인 이름>"
   },
-  "license": "MIT"
+  "homepage": "https://github.com/cokestrawberry/klara",
+  "repository": "https://github.com/cokestrawberry/klara",
+  "license": "MIT",
+  "keywords": ["output-style", "korean", "english", "wording"]
 }
