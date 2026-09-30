@@ -19,7 +19,7 @@ graders:
   # Bounded by non-Hangul on the left and a particle on the right so 복잡 and 잡다 do not match.
   - name: no-job
     type: regex
-    pattern: (^|[^가-힣])잡([^가-힣]|[이은을의에]|$)
+    pattern: (^|[^가-힣])잡([^가-힣]|[이은을의에과만들]|으로|$)
     match: not_contains
     target:
       source: file

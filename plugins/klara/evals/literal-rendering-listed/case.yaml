@@ -17,10 +17,10 @@ graders:
     target:
       source: file
       path: result.md
-  # 맞물리다 is the natural verb for events that coincide, so it is left out.
+  # Only forms of 맞다 count; 맞물리다, 맞추다, and 맞아떨어지다 are separate verbs.
   - name: no-coincides-with
     type: regex
-    pattern: "[와과] 맞(?!물)"
+    pattern: "[와과]도? (?:[가-힣]+ )?맞(?:습|는|다|았|아(?!떨))"
     match: not_contains
     target:
       source: file
