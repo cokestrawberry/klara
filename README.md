@@ -15,12 +15,17 @@ claude plugin marketplace add cokestrawberry/klara
 claude plugin install klara@klara
 ```
 
+In a Claude Code session that is already running, run `/reload-plugins` to apply the change.
+
 While the plugin is enabled, its output style applies automatically and overrides your
-`outputStyle` setting. To turn the style off, disable the plugin:
+`outputStyle` setting. If another enabled plugin also forces its output style, Claude Code uses
+the style of the plugin it loads first. To turn the style off, disable the plugin:
 
 ```sh
 claude plugin disable klara@klara
 ```
+
+In a Claude Code session that is already running, run `/reload-plugins` to apply the change.
 
 ## Rules
 
