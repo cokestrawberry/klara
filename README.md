@@ -125,6 +125,76 @@ claude plugin eval plugins/klara --no-publish --allow-tools Bash Write \
 
 Results are written to `plugins/klara/evals/results/`.
 
+## Token usage
+
+The rules add input tokens to every session, and they can lead the agent to look words up before
+it answers. These figures were measured on 2026-10-01 at commit `c5058eb` with
+[scripts/token-usage/measure.ps1](scripts/token-usage/measure.ps1):
+
+- Claude Code 2.1.285 with `claude-sonnet-5-5`, run through `claude plugin eval`
+- Codex CLI 0.159.2 with `gpt-6-luna`, the default model of a free ChatGPT account, run through
+  `codex exec --json`
+
+The tasks are the eight cases in [plugins/klara/evals](plugins/klara/evals) and a
+[control task](scripts/token-usage/control/case.yaml) with no wording to choose: fixing a small
+Python function. Each task ran twice under each condition:
+
+1. No plugin.
+2. Plugin with web access: `WebFetch` for the reference sites in Claude Code; live web search and
+   network access in Codex.
+3. Plugin without web access: no `WebFetch` in Claude Code; no web search and no network access
+   in Codex.
+
+Each value is the median of the two runs. Input counts every input token of the run, cached or
+not.
+
+### Claude Code
+
+| Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| control | 21,576 | 24,086 | 24,078 | 275 | 247.5 | 231.5 |
+| style-loaded | 10,661 | 11,914.5 | 11,913 | 4 | 10 | 10 |
+| dead-metaphor | 21,646 | 24,470.5 | 24,365.5 | 384 | 785 | 719 |
+| generated-shapes | 22,323.5 | 25,031 | 24,932.5 | 892 | 1,052.5 | 1,031 |
+| literal-rendering-listed | 21,771.5 | 24,699 | 24,613 | 490 | 1,077 | 984.5 |
+| literal-rendering-unlisted | 21,778 | 24,712 | 24,627.5 | 525.5 | 1,056 | 1,137.5 |
+| term-of-art | 21,772.5 | 24,304.5 | 24,365.5 | 489 | 520.5 | 600 |
+| transliteration-listed | 21,773.5 | 24,453.5 | 24,356 | 421 | 727.5 | 632.5 |
+| transliteration-unlisted | 21,773 | 24,377.5 | 24,438.5 | 640.5 | 710 | 796 |
+
+No run looked anything up under any condition.
+
+### Codex
+
+| Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 | Requests 2 | Requests 3 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| control | 26,842.5 | 28,930 | 29,661 | 159.5 | 135 | 171 | 0 | 0 |
+| style-loaded | 13,535 | 14,200 | 11,760 | 6 | 6 | 71.5 | 0 | 0 |
+| dead-metaphor | 34,285 | 74,733 | 66,947 | 207.5 | 608 | 595.5 | 3 | 2 |
+| generated-shapes | 48,701 | 77,745 | 65,863 | 410.5 | 768.5 | 666.5 | 2 | 1 |
+| literal-rendering-listed | 40,639.5 | 97,725.5 | 59,123.5 | 283 | 796.5 | 445 | 5 | 2 |
+| literal-rendering-unlisted | 49,038.5 | 84,345.5 | 59,039.5 | 442 | 704 | 701 | 4 | 1 |
+| term-of-art | 40,537 | 77,806 | 60,154 | 267 | 553 | 584 | 4 | 2 |
+| transliteration-listed | 40,599.5 | 67,943 | 61,448.5 | 263 | 530 | 806 | 2 | 2 |
+| transliteration-unlisted | 41,162 | 71,752.5 | 75,949.5 | 282.5 | 617 | 781.5 | 3 | 2 |
+
+Requests count web searches and shell commands that fetch a URL, summed over both runs. Under
+condition 3, every shell command that fetched a URL failed to connect. Turning web search off also
+removes the web search tool from the request, so condition 3 differs from condition 2 by more than
+the requests.
+
+### Measure again
+
+```powershell
+powershell -File scripts/token-usage/measure.ps1 -Agent claude -WorkRoot <dir> -Runs 2
+powershell -File scripts/token-usage/measure.ps1 -Agent codex -WorkRoot <dir> -Runs 2
+```
+
+The script writes one row per run to `<dir>/<agent>-runs.csv`, including cached input tokens and
+the characters that web requests returned, and keeps each run's trace in `<dir>/traces/`. The Codex
+measurement needs klara installed with its hook trusted, as in [Install](#install). Every run
+calls the model on your account. The figures above come from Windows PowerShell 5.1.
+
 ## Sponsor
 
 [![Sponsor](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/cokestrawberry)
