@@ -89,8 +89,11 @@ The full rules are in [language-and-tone.md](plugins/klara/output-styles/languag
 The cases in [plugins/klara/evals](plugins/klara/evals) score the style with
 [`claude plugin eval`](https://code.claude.com/docs/en/plugin-evals), which needs Claude Code
 v2.1.269 or later. Each case runs with and without the plugin, and every run calls the model on
-your account. The grants let the agent look words up in the [references](#references) and write
-its result to a file, as it would in a normal session:
+your account. Granting `Bash` runs every command in Claude Code's
+[sandbox](https://code.claude.com/docs/en/sandboxing), which needs macOS, Linux with `bubblewrap`
+and `socat` installed, or WSL2 on Windows; elsewhere every run is refused. The grants below let
+the agent look words up in the [references](#references) and write its result to a file, as it
+would in a normal session:
 
 ```sh
 claude plugin eval plugins/klara --no-publish --allow-tools Bash Write \
