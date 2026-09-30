@@ -1,0 +1,13 @@
+name: plugin-validate
+
+on:
+  pull_request:
+
+jobs:
+  plugin-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm install -g @anthropic-ai/claude-code@2.1.285
+      - run: claude plugin validate --strict .
+      - run: claude plugin validate --strict plugins/klara
