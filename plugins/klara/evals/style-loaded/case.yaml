@@ -1,0 +1,12 @@
+schema_version: "1.1"
+name: style-loaded
+description: The plugin's output style reaches the eval session
+execution:
+  prompt: >-
+    지금 이 세션에 적용된 output style의 이름을 번역하지 말고 원문 그대로 적어 주세요.
+    적용된 output style이 없으면 "없음"이라고만 답해 주세요.
+graders:
+  - name: style-name
+    type: regex
+    pattern: Language and tone
+    flags: i

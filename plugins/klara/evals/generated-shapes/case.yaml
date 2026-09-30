@@ -1,0 +1,63 @@
+schema_version: "1.1"
+name: generated-shapes
+description: A Korean summary avoids the sentence shapes the style lists as marks of generated text
+execution:
+  max_turns: 30
+  timeout_seconds: 600
+  prompt: |
+    아래 요약 초안을 팀 채널에 올릴 수 있게 다듬어 `result.md` 파일로 저장해 주세요.
+
+    > # 이번 주 변경: 4건 — 로그인, 결제, 설정, CI
+    >
+    > 이번 주 변경 사항은 네 가지입니다.
+    >
+    > - 로그인 실패 시 재시도를 3회로 제한
+    > - 결제 모듈의 시간 초과를 30초에서 10초로 단축
+    > - 사용하지 않는 설정 파일 2개 삭제
+    > - PR마다 lint 검사 실행
+    >
+    > 가장 눈에 띄는 것은 결제 시간 초과 단축입니다. 코드베이스는 대청소를 마친 집처럼
+    > 가벼워졌습니다. 작은 변화가 큰 차이를 만듭니다.
+graders:
+  - name: no-count-title
+    type: regex
+    pattern: ":\\s*\\d+\\s*(건|개|가지)\\s*[—–-]"
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  - name: no-cleft
+    type: llm
+    focus:
+      source: file
+      path: result.md
+    criteria: >-
+      FAIL if any sentence is a cleft construction: a nominalized clause ending in 것은 or 점은
+      as the subject, with the point moved into the predicate, as in "~하는 것은 ~입니다" or
+      "~한 점은 ~때문입니다". PASS otherwise.
+  - name: no-count-teaser
+    type: llm
+    focus:
+      source: file
+      path: result.md
+    criteria: >-
+      FAIL if the text announces how many items follow before listing them, as in
+      "변경 사항은 네 가지입니다" or "넷으로 요약됩니다". Numbers that belong to a change itself,
+      such as 3회, 10초, or 2개, do not count. PASS otherwise.
+  - name: no-invented-metaphor
+    type: llm
+    focus:
+      source: file
+      path: result.md
+    criteria: >-
+      FAIL if the text uses a metaphor that is not an established Korean expression, or carries a
+      metaphor or persona across sentences. An analogy that explains a concept where it is
+      introduced is fine. PASS if the changes are described plainly.
+  - name: no-aphorism
+    type: llm
+    focus:
+      source: file
+      path: result.md
+    criteria: >-
+      FAIL if the text contains an aphorism-shaped one-liner: a short, quotable general statement
+      that adds no fact about the changes, such as "작은 변화가 큰 차이를 만듭니다". PASS otherwise.

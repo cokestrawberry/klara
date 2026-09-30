@@ -83,3 +83,21 @@ usage is not treated as a problem.
   much as in anything committed or posted.
 
 The full rules are in [language-and-tone.md](plugins/klara/output-styles/language-and-tone.md).
+
+## Evaluate
+
+The cases in [plugins/klara/evals](plugins/klara/evals) score the style with
+[`claude plugin eval`](https://code.claude.com/docs/en/plugin-evals), which needs Claude Code
+v2.1.269 or later. Each case runs with and without the plugin, and every run calls the model on
+your account. The grants let the agent look words up in the [references](#references) and write
+its result to a file, as it would in a normal session:
+
+```sh
+claude plugin eval plugins/klara --no-publish --allow-tools Bash Write \
+  "WebFetch(domain:terms.tta.or.kr)" "WebFetch(domain:pascal.computer.org)" \
+  "WebFetch(domain:stdict.korean.go.kr)" "WebFetch(domain:opendict.korean.go.kr)" \
+  "WebFetch(domain:oxfordlearnersdictionaries.com)" \
+  "WebFetch(domain:www.oxfordlearnersdictionaries.com)"
+```
+
+Results are written to `plugins/klara/evals/results/`.
