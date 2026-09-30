@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v7
       # Start the hook the way Codex does: `$SHELL -lc <command>` on Unix. On Windows it runs
       # `commandWindows` (else `command`) with `%COMSPEC% /C "<command>"` when no hook shell is
-      # set, and with the configured shell otherwise, which can be PowerShell `-Command`.
+      # set, and with the configured shell otherwise, which can be PowerShell `-NoProfile -Command`.
       - shell: pwsh
         run: |
           $hook = (Get-Content plugins/klara/.codex-plugin/plugin.json -Raw | ConvertFrom-Json).hooks.hooks.SessionStart[0].hooks[0]
@@ -24,6 +24,7 @@ jobs:
             $starts = @([Diagnostics.ProcessStartInfo]::new($env:ComSpec, "/C `"$command`""))
             foreach ($shell in 'powershell.exe', 'pwsh') {
               $start = [Diagnostics.ProcessStartInfo]::new($shell)
+              $start.ArgumentList.Add('-NoProfile')
               $start.ArgumentList.Add('-Command')
               $start.ArgumentList.Add($command)
               $starts += $start
