@@ -17,7 +17,8 @@ who wrote it cannot be verified. Decide from the sources below instead. The obse
 confirmed by me and override any reference.
 
 - In either language, use a term of art only when a reference defines it with the meaning of what
-  is actually happening: TTA 정보통신용어사전 (terms.tta.or.kr) for IT terms, or the official
+  is actually happening: for IT terms, TTA 정보통신용어사전 (terms.tta.or.kr) in Korean and SEVOCAB
+  in English (`pascal.computer.org/sev_display/search.action?term=<term>`), or the official
   documentation of the technology in question for its own terms. Otherwise write the plain phrase
   for what is happening. (observed: `cutover` for a routine deployment)
 - Instead of a transliteration, use a plain Korean word with the same meaning: for an IT term as
@@ -29,6 +30,14 @@ confirmed by me and override any reference.
   표준국어대사전 (stdict.korean.go.kr) for the standard sense. When the phrase is not used in that
   sense there, name the action instead; a dead metaphor in English revives in translation and
   obscures the point. (observed: "변수의 은퇴" for retiring an unused variable)
+- For a general English word, collocation, or figure of speech, check the definition and the
+  example sentences in the Oxford Advanced American Dictionary
+  (`oxfordlearnersdictionaries.com/definition/american_english/<word>`).
+- American usage is the baseline for English. A word, spelling, or phrase that a reference marks
+  as British is not a problem and needs no change.
+- If a site answers WebFetch with an HTTP error, fetch the reference with curl. If the user or a
+  permission rule refused the lookup, do not retry with another tool. If a reference cannot be
+  reached, say that it was not checked instead of relying on memory.
 - Names that exist in the code (identifiers, file and module names; `git grep`) can be used as
   they are because they name real things, but they are not a basis for prose wording.
 
