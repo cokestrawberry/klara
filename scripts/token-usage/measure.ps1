@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Force $traces | Out-Null
 function Get-Sum($values) { [int](($values | Measure-Object -Sum).Sum) }
 
 function Get-MeanTokens($runs) {
-    [Math]::Round(($runs | ForEach-Object { $_.input_total + $_.output } | Measure-Object -Average).Average, 0)
+    [Math]::Round(($runs | Where-Object { $_.turns } | ForEach-Object { $_.input_total + $_.output } | Measure-Object -Average).Average, 0)
 }
 
 function Measure-Claude {
@@ -143,7 +143,7 @@ $rows | Group-Object condition | ForEach-Object {
         condition = $_.Name
         eval_cases = Get-MeanTokens @($group | Where-Object { $_.case -ne 'control' })
         control = Get-MeanTokens @($group | Where-Object { $_.case -eq 'control' })
-        web_requests = Get-Sum $group.lookups
+        web_calls = Get-Sum $group.lookups
         errors = @($group | Where-Object { $_.error }).Count
     }
 } | Format-Table -AutoSize
