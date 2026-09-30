@@ -145,59 +145,36 @@ Python function. Each task ran twice under each condition:
 3. Plugin without web access: no `WebFetch` in Claude Code; no web search and no network access
    in Codex.
 
-Each value is the median of the two runs. Input counts every input token of the run, cached or
-not.
+Each value is the mean number of tokens per run, input and output together, cached or not, rounded
+to a whole token:
 
-### Claude Code measurements
+| Condition | Claude Code: eval cases | Claude Code: control | Codex: eval cases | Codex: control |
+| --- | ---: | ---: | ---: | ---: |
+| 1. No plugin | 20,918 | 21,851 | 38,832 | 27,002 |
+| 2. Plugin with web access | 23,738 | 24,334 | 71,354 | 29,065 |
+| 3. Plugin without web access | 23,690 | 24,310 | 58,117 | 29,832 |
 
-| Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| control | 21,576 | 24,086 | 24,078 | 275 | 247.5 | 231.5 |
-| style-loaded | 10,661 | 11,914.5 | 11,913 | 4 | 10 | 10 |
-| dead-metaphor | 21,646 | 24,470.5 | 24,365.5 | 384 | 785 | 719 |
-| generated-shapes | 22,323.5 | 25,031 | 24,932.5 | 892 | 1,052.5 | 1,031 |
-| literal-rendering-listed | 21,771.5 | 24,699 | 24,613 | 490 | 1,077 | 984.5 |
-| literal-rendering-unlisted | 21,778 | 24,712 | 24,627.5 | 525.5 | 1,056 | 1,137.5 |
-| term-of-art | 21,772.5 | 24,304.5 | 24,365.5 | 489 | 520.5 | 600 |
-| transliteration-listed | 21,773.5 | 24,453.5 | 24,356 | 421 | 727.5 | 632.5 |
-| transliteration-unlisted | 21,773 | 24,377.5 | 24,438.5 | 640.5 | 710 | 796 |
-
-No run looked anything up under any condition.
+No Claude Code run made a web request. Across the eval cases, Codex made 23 web requests, counting
+web searches and shell commands that fetch a URL, under condition 2. Under condition 3 it tried 12,
+and every attempt failed to connect. It made none in the control task. Turning web search off also
+removes the web search tool from the request, so condition 3 differs from condition 2 by more than
+the requests.
 
 `claude plugin details klara` reports `~0 tok` added to every session, and `/context` has no row
 for the output style, so neither shows what the rules add. The figures above come from the token
-counts the API returned for each run.
-
-### Codex measurements
-
-| Task | Input 1 | Input 2 | Input 3 | Output 1 | Output 2 | Output 3 | Requests 2 | Requests 3 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| control | 26,842.5 | 28,930 | 29,661 | 159.5 | 135 | 171 | 0 | 0 |
-| style-loaded | 13,535 | 14,200 | 11,760 | 6 | 6 | 71.5 | 0 | 0 |
-| dead-metaphor | 34,285 | 74,733 | 66,947 | 207.5 | 608 | 595.5 | 3 | 2 |
-| generated-shapes | 48,701 | 77,745 | 65,863 | 410.5 | 768.5 | 666.5 | 2 | 1 |
-| literal-rendering-listed | 40,639.5 | 97,725.5 | 59,123.5 | 283 | 796.5 | 445 | 5 | 2 |
-| literal-rendering-unlisted | 49,038.5 | 84,345.5 | 59,039.5 | 442 | 704 | 701 | 4 | 1 |
-| term-of-art | 40,537 | 77,806 | 60,154 | 267 | 553 | 584 | 4 | 2 |
-| transliteration-listed | 40,599.5 | 67,943 | 61,448.5 | 263 | 530 | 806 | 2 | 2 |
-| transliteration-unlisted | 41,162 | 71,752.5 | 75,949.5 | 282.5 | 617 | 781.5 | 3 | 2 |
-
-Requests count web searches and shell commands that fetch a URL, summed over both runs. Under
-condition 3, every shell command that fetched a URL failed to connect. Turning web search off also
-removes the web search tool from the request, so condition 3 differs from condition 2 by more than
-the requests.
+counts that Claude Code and Codex recorded for each run.
 
 ### Codex hook on later turns
 
 This was measured once in an interactive Codex session on 2026-10-01, sending `ok` after each
-step:
+step. Tokens are the input and output of the turn that followed:
 
-| Step before `ok` | Rules added | Input |
+| Step before `ok` | Rules added | Tokens |
 | --- | --- | ---: |
-| Start `codex` | Yes | 14,813 |
-| `/compact` | Yes | 14,903 |
-| `/clear` | Yes | 14,813 |
-| Quit, then `codex resume --last` | Yes, and the earlier copy stays | 15,773 |
+| Start `codex` | Yes | 14,909 |
+| `/compact` | Yes | 14,915 |
+| `/clear` | Yes | 14,914 |
+| Quit, then `codex resume --last` | Yes, and the earlier copy stays | 15,943 |
 
 The session log reports no tokens for the `/compact` step itself, so the table leaves it out.
 

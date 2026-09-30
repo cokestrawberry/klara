@@ -1,6 +1,6 @@
 # Measures the tokens klara adds, per eval case and condition (none, lookup, nolookup).
 #   powershell -File scripts/token-usage/measure.ps1 -Agent claude|codex -WorkRoot <dir> [-Runs 2]
-# Writes <WorkRoot>/<agent>-runs.csv and prints the median and range per case and condition.
+# Writes <WorkRoot>/<agent>-runs.csv and prints the mean tokens per run for each condition.
 param(
     [Parameter(Mandatory = $true)][ValidateSet('claude', 'codex')][string]$Agent,
     [Parameter(Mandatory = $true)][string]$WorkRoot,
@@ -16,10 +16,8 @@ New-Item -ItemType Directory -Force $traces | Out-Null
 
 function Get-Sum($values) { [int](($values | Measure-Object -Sum).Sum) }
 
-function Get-Median($values) {
-    $sorted = @($values | Sort-Object)
-    $middle = [int][Math]::Floor($sorted.Count / 2)
-    if ($sorted.Count % 2) { $sorted[$middle] } else { ($sorted[$middle - 1] + $sorted[$middle]) / 2 }
+function Get-MeanTokens($runs) {
+    [Math]::Round(($runs | ForEach-Object { $_.input_total + $_.output } | Measure-Object -Average).Average, 0)
 }
 
 function Measure-Claude {
@@ -139,14 +137,13 @@ function Measure-Codex {
 
 $rows = @(if ($Agent -eq 'claude') { Measure-Claude } else { Measure-Codex })
 $rows | Export-Csv (Join-Path $WorkRoot "$Agent-runs.csv") -NoTypeInformation -Encoding UTF8
-$rows | Group-Object case, condition | ForEach-Object {
+$rows | Group-Object condition | ForEach-Object {
     $group = $_.Group
     [pscustomobject][ordered]@{
-        case = $group[0].case; condition = $group[0].condition; runs = $group.Count
-        input_median = Get-Median $group.input_total
-        input_range = '{0}-{1}' -f ($group.input_total | Measure-Object -Minimum).Minimum, ($group.input_total | Measure-Object -Maximum).Maximum
-        output_median = Get-Median $group.output
-        lookups_median = Get-Median $group.lookups
+        condition = $_.Name
+        eval_cases = Get-MeanTokens @($group | Where-Object { $_.case -ne 'control' })
+        control = Get-MeanTokens @($group | Where-Object { $_.case -eq 'control' })
+        web_requests = Get-Sum $group.lookups
         errors = @($group | Where-Object { $_.error }).Count
     }
 } | Format-Table -AutoSize
