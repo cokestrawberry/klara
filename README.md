@@ -29,8 +29,8 @@ In a Claude Code session that is already running, run `/reload-plugins` to apply
 
 ## How to use
 
-There is no command to run or style to select. After you install the plugin, use Claude Code as
-usual; Claude's responses follow the rules below.
+There is no command to run. Once the style applies as described in [Install](#install), use
+Claude Code as usual; Claude's responses follow the rules below.
 
 The style applies to the main conversation and to a
 [fork](https://code.claude.com/docs/en/sub-agents#fork-the-current-conversation), a subagent that
