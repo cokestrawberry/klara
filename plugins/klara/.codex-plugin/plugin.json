@@ -1,0 +1,19 @@
+{
+  "name": "klara",
+  "description": "Korean and English wording checked against references instead of intuition",
+  "version": "1.0.0",
+  "hooks": {
+    "hooks": {
+      "SessionStart": [
+        {
+          "hooks": [
+            {
+              "type": "command",
+              "command": "sed '1,/^---$/d' \"$PLUGIN_ROOT/output-styles/language-and-tone.md\""
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
