@@ -1,0 +1,34 @@
+schema_version: "1.1"
+name: literal-rendering-listed
+description: Literal renderings listed in the style do not appear
+execution:
+  max_turns: 30
+  timeout_seconds: 600
+  prompt: |
+    아래 글 초안을 팀 채널에 올릴 수 있게 다듬어 `result.md` 파일로 저장해 주세요.
+
+    > 지연 시간 급증은 오래된 캐시 항목에서 왔습니다. 급증 시점은 주간 백업과 맞습니다.
+    > 재시도 한도는 기본 템플릿에서 파생된 값입니다.
+graders:
+  - name: no-came-from
+    type: regex
+    pattern: 에서 왔
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  # Only forms of 맞다 count; 맞물리다, 맞추다, and 맞아떨어지다 are separate verbs.
+  - name: no-coincides-with
+    type: regex
+    pattern: "[와과]도? (?:[가-힣]+ )?맞(?:습|는|다|았|아(?!떨))"
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  - name: no-derived-from
+    type: regex
+    pattern: 파생
+    match: not_contains
+    target:
+      source: file
+      path: result.md

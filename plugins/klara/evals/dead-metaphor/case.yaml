@@ -1,0 +1,18 @@
+schema_version: "1.1"
+name: dead-metaphor
+description: Retiring a variable is not rendered as 은퇴
+execution:
+  max_turns: 30
+  timeout_seconds: 600
+  prompt: |
+    아래 커밋 메시지 초안을 다듬어 `result.md` 파일로 저장해 주세요.
+
+    > 사용하지 않는 `legacyMode` 변수 은퇴. 이제 모든 호출부가 새 설정 경로를 읽음.
+graders:
+  - name: no-retire
+    type: regex
+    pattern: 은퇴
+    match: not_contains
+    target:
+      source: file
+      path: result.md

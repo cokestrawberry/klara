@@ -1,0 +1,47 @@
+schema_version: "1.1"
+name: transliteration-listed
+description: Transliterations listed as observed cases in the style are replaced
+execution:
+  max_turns: 30
+  timeout_seconds: 600
+  prompt: |
+    아래 공지 초안을 팀 채널에 올릴 수 있게 다듬어 `result.md` 파일로 저장해 주세요.
+
+    > 나이틀리 잡이 배포 윈도우에 겹쳐서 실패함. 외부 API 스텁 교체 후 어서션 전부 통과 확인.
+graders:
+  - name: no-nightly
+    type: regex
+    pattern: 나이틀리
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  # Bounded by non-Hangul on the left and a particle on the right so 복잡 and 잡다 do not match.
+  - name: no-job
+    type: regex
+    pattern: (^|[^가-힣])잡([^가-힣]|[이은을의에과만들]|으로|$)
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  - name: no-window
+    type: regex
+    pattern: 윈도우
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  - name: no-stub
+    type: regex
+    pattern: 스텁
+    match: not_contains
+    target:
+      source: file
+      path: result.md
+  - name: no-assertion
+    type: regex
+    pattern: 어서션
+    match: not_contains
+    target:
+      source: file
+      path: result.md
