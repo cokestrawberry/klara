@@ -107,4 +107,6 @@ Results are written to `plugins/klara/evals/results/`.
 
 ## Sponsor
 
-You can support klara through [GitHub Sponsors](https://github.com/sponsors/cokestrawberry).
+[![Sponsor](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/cokestrawberry)
+
+You can support klara through GitHub Sponsors.
