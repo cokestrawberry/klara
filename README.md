@@ -6,7 +6,7 @@ do, choosing wording from references instead of intuition:
 documentation for its own terms, and [표준국어대사전](https://stdict.korean.go.kr) and
 [우리말샘](https://opendict.korean.go.kr) for general Korean words and phrases.
 
-Named after the observant robot in *Klara and the Sun*.
+Named after the observant robot in *[Klara and the Sun](https://en.wikipedia.org/wiki/Klara_and_the_Sun)*.
 
 ## Install
 
