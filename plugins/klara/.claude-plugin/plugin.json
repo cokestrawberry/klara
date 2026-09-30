@@ -1,0 +1,9 @@
+{
+  "name": "klara",
+  "description": "Output style for Korean and English wording checked against references instead of intuition",
+  "version": "1.0.0",
+  "author": {
+    "name": "<본인 이름>"
+  },
+  "license": "MIT"
+}

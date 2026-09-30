@@ -1,0 +1,14 @@
+{
+  "name": "klara",
+  "description": "Wording rules for Claude Code, checked against references instead of intuition",
+  "owner": {
+    "name": "<본인 이름>"
+  },
+  "plugins": [
+    {
+      "name": "klara",
+      "source": "./plugins/klara",
+      "description": "Korean and English wording rules as an output style"
+    }
+  ]
+}
