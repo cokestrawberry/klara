@@ -1,6 +1,6 @@
 {
   "name": "klara",
-  "description": "Wording rules for Claude Code, checked against references instead of intuition",
+  "description": "Wording rules for Claude Code and Codex, checked against references instead of intuition",
   "owner": {
     "name": "cokestrawberry"
   },
