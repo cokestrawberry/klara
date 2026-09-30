@@ -1,0 +1,20 @@
+schema_version: "1.1"
+name: control
+description: A code fix with no wording to choose, as the baseline task for token measurement
+execution:
+  max_turns: 30
+  timeout_seconds: 600
+  prompt: |
+    아래 함수는 1부터 n까지의 합을 돌려줘야 하는데 결과가 틀립니다. 고친 함수만 `result.md` 파일로 저장해 주세요.
+
+    ```python
+    def total(n):
+        return sum(range(n))
+    ```
+graders:
+  - name: fixed
+    type: regex
+    pattern: "range\\(\\s*(1\\s*,\\s*)?n\\s*\\+\\s*1\\s*\\)|n\\s*\\*\\s*\\(\\s*n\\s*\\+\\s*1\\s*\\)"
+    target:
+      source: file
+      path: result.md

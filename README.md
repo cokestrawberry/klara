@@ -125,6 +125,85 @@ claude plugin eval plugins/klara --no-publish --allow-tools Bash Write \
 
 Results are written to `plugins/klara/evals/results/`.
 
+## Token usage
+
+The rules add input tokens to every session, and they can lead the agent to look words up before
+it answers. These figures were measured on 2026-10-01 at commit `c5058eb` with
+[scripts/token-usage/measure.ps1](scripts/token-usage/measure.ps1):
+
+- Claude Code 2.1.285 with `claude-sonnet-5-5`, run through `claude plugin eval`
+- Codex CLI 0.159.2 with `gpt-6-luna`, the default model of a free ChatGPT account, run through
+  `codex exec --json`
+
+The tasks are the eight cases in [plugins/klara/evals](plugins/klara/evals) and a
+[control task](scripts/token-usage/control/case.yaml) with no wording to choose: fixing a small
+Python function. Each task ran under each of these conditions:
+
+1. No plugin.
+2. Plugin with web access: `WebFetch` for the reference sites in Claude Code; live web search and
+   network access in Codex.
+3. Plugin without web access: no `WebFetch` in Claude Code; no web search and no network access
+   in Codex.
+
+Each value is the mean number of tokens per run, input and output together, cached or not, rounded
+to a whole token:
+
+| Condition | Claude Code: eval cases | Claude Code: control | Codex: eval cases | Codex: control |
+| --- | ---: | ---: | ---: | ---: |
+| 1. No plugin | 20,918 | 21,851 | 38,832 | 27,002 |
+| 2. Plugin with web access | 23,738 | 24,334 | 71,354 | 29,065 |
+| 3. Plugin without web access | 23,690 | 24,310 | 58,117 | 29,832 |
+
+No Claude Code run made a web request. In the eval cases, Codex searched the web under condition 2.
+Under condition 3 it ran shell commands that fetch pages from the reference sites instead, and
+every one failed to connect. It made no web request in the control task. Turning web search off
+also removes the web search tool from the request, so condition 3 differs from condition 2 by more
+than the requests.
+
+`claude plugin details klara` reports `~0 tok` added to every session, and `/context` has no row
+for the output style, so neither shows what the rules add. The figures above come from the token
+counts that Claude Code and Codex recorded for each run.
+
+### Codex hook on later turns
+
+This was measured in an interactive Codex session on 2026-10-01, sending `ok` after each step.
+Tokens are the input and output of the turn that followed:
+
+| Step before `ok` | Rules added | Tokens |
+| --- | --- | ---: |
+| Start `codex` | Yes | 14,909 |
+| `/compact` | Yes | 14,915 |
+| `/clear` | Yes | 14,914 |
+| Quit, then `codex resume --last` | Yes, and the earlier copy stays | 15,943 |
+
+The session log reports no tokens for the `/compact` step itself, so the table leaves it out.
+
+### Measure again
+
+```powershell
+powershell -File scripts/token-usage/measure.ps1 -Agent claude -WorkRoot <dir> -Runs 2
+powershell -File scripts/token-usage/measure.ps1 -Agent codex -WorkRoot <dir> -Runs 2
+```
+
+The script writes one row per run to `<dir>/<agent>-runs.csv`, including cached input tokens and
+the characters that web requests returned, and keeps each run's trace in `<dir>/traces/`. Every
+run calls the model on your account. The figures above come from Windows PowerShell 5.1.
+
+Codex runs every condition with the `config.toml`, plugins, and `AGENTS.md` in its
+[home directory](https://learn.chatgpt.com/docs/agent-configuration/agents-md) (`~/.codex` unless
+`CODEX_HOME` is set). To measure your copy of this repository without them, set `CODEX_HOME` to
+an empty directory and install klara from the copy:
+
+```powershell
+$env:CODEX_HOME = '<empty dir>'
+codex login
+codex plugin marketplace add <repo dir>
+codex plugin add klara@klara
+```
+
+Then open `codex` in the same shell, trust the klara hook in `/hooks` as in [Install](#install),
+quit, and run the script from that shell.
+
 ## Sponsor
 
 [![Sponsor](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/cokestrawberry)
