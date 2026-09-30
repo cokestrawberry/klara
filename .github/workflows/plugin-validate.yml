@@ -10,4 +10,4 @@ jobs:
       - uses: actions/checkout@v7
       - run: npm install -g @anthropic-ai/claude-code@2.1.285
       - run: claude plugin validate --strict .
-      - run: claude plugin validate --strict plugins/klara
+      - run: claude plugin validate --strict "$(jq -r '.plugins[].source' .claude-plugin/marketplace.json)"
