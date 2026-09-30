@@ -1,10 +1,7 @@
 # klara
 
 A Claude Code plugin that provides one output style. The style makes Claude write the way people
-do, choosing wording from references instead of intuition:
-[TTA 정보통신용어사전](https://terms.tta.or.kr) for IT terms, a technology's official
-documentation for its own terms, and [표준국어대사전](https://stdict.korean.go.kr) and
-[우리말샘](https://opendict.korean.go.kr) for general Korean words and phrases.
+do, choosing wording from [references](#references) instead of intuition.
 
 Named after the observant robot in *[Klara and the Sun](https://en.wikipedia.org/wiki/Klara_and_the_Sun)*.
 
@@ -37,6 +34,24 @@ The style applies to the main conversation and to a
 starts with the whole conversation so far. Other subagents
 [run their own system prompt](https://code.claude.com/docs/en/output-styles#how-output-styles-work),
 so text they write does not follow the rules.
+
+## References
+
+| When | Korean | English |
+| --- | --- | --- |
+| Defining an IT term | [TTA 정보통신용어사전][tta] | [SEVOCAB][sevocab] |
+| A term specific to one technology | Its official documentation | Its official documentation |
+| Meaning of a general word | [표준국어대사전][stdict] | [Oxford Advanced Learner's Dictionary][oald] |
+| Usage of a general word or phrase | [우리말샘][opendict] | Example sentences in [Oxford][oald] |
+
+SEVOCAB covers software and systems engineering terms. English follows American usage; British
+usage is not treated as a problem.
+
+[tta]: https://terms.tta.or.kr
+[sevocab]: https://pascal.computer.org
+[stdict]: https://stdict.korean.go.kr
+[opendict]: https://opendict.korean.go.kr
+[oald]: https://www.oxfordlearnersdictionaries.com
 
 ## Rules
 
