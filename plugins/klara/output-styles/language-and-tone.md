@@ -37,8 +37,9 @@ confirmed by me and override any reference.
   as British is not a problem and needs no change.
 - If a built-in web tool gets an HTTP error from a site, fetch the reference with curl. If the
   user or a permission rule refused the lookup, do not retry with another tool; a setting that
-  turns off web search or the sandbox's network access counts as a refusal too. If a reference
-  cannot be reached, say that it was not checked instead of relying on memory.
+  turns off web search counts as a refusal too. If the sandbox's network access is off, do not
+  fetch a reference with curl or any other shell command. If a reference cannot be reached, say
+  that it was not checked instead of relying on memory.
 - Names that exist in the code (identifiers, file and module names; `git grep`) can be used as
   they are because they name real things, but they are not a basis for prose wording.
 
