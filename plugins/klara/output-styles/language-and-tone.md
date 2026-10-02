@@ -37,10 +37,10 @@ confirmed by me and override any reference.
   as British is not a problem and needs no change.
 - If a built-in web tool gets an HTTP error from a site, fetch the reference with curl. If the
   user or a permission rule refused the lookup, do not retry with another tool. If a reference
-  cannot be reached, say that it was not checked instead of relying on memory. Give the address
-  requested and the error each attempt returned. If an error page said how to contact the site's
-  administrator, give that as well, with any reference number to quote. Then list what the user
-  can check:
+  cannot be reached, say that it was not checked instead of relying on memory, and give the
+  error each attempt returned. If an error page said how to contact the site's administrator,
+  give that as well, with any reference number to quote. The first time a site cannot be
+  reached in a conversation, also give the address requested and list what the user can check:
   - Whether the address opens in a browser on the same computer. If it does, the agent's sandbox
     or network settings may be blocking the request, or the site may refuse automated requests.
   - Whether it opens on another device on the same network, such as a phone on the same Wi-Fi.
