@@ -75,22 +75,18 @@ every conversation instead:
 | ChatGPT | Free, Go | [chat/light.md][light] | Custom instructions |
 | ChatGPT | Plus, Pro, Business, Enterprise, Edu | [chat/full.md][full] | Custom instructions |
 | Claude | All | [chat/light.md][light] | Instructions for Claude |
-| Claude | Team, Enterprise | [chat/light.md][light] | Organization instructions |
 
 - **Custom instructions**: in ChatGPT, open Settings > Personalization, turn on Enable
   customization, and paste the file's contents into Custom instructions. In the iOS and Android
   apps, open Settings > Customize ChatGPT instead.
-- **Instructions for Claude**: in Claude, open Settings > General. They
+- **Instructions for Claude**: in Claude, open Settings and paste the file's contents into
+  Instructions for Claude, under Account or General. They
   [apply to all of your conversations][claude-instructions].
-- **Organization instructions**: Owners and Primary Owners of a Team or Enterprise organization
-  can [apply the rules to everyone in the organization][org-instructions] from Organization
-  settings > Organization and access.
 
 ChatGPT [saves up to 1,500 characters][chatgpt-instructions] of custom instructions on Free and
 Go, and up to 5,000 on Plus, Pro, Business, Enterprise, and Edu. Claude's documentation gives no
-limit for Instructions for Claude, so the table uses the 1,500-character file there; organization
-instructions take up to 3,000 characters. The plans, limits, and settings above were checked on
-2026-10-02.
+limit for Instructions for Claude, so the table uses the 1,500-character file there. The plans,
+limits, and settings above were checked on 2026-10-02.
 
 `chat/full.md` holds the rules without the parts that apply only to Claude Code and Codex.
 `chat/light.md` shortens them further and leaves out the observed cases. The
@@ -100,7 +96,6 @@ instructions take up to 3,000 characters. The plans, limits, and settings above 
 [light]: chat/light.md
 [platform-support]: https://claude.com/docs/plugins/platform-support
 [claude-instructions]: https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features
-[org-instructions]: https://support.claude.com/en/articles/14546867-set-organization-instructions
 [chatgpt-instructions]: https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions
 
 ## References
