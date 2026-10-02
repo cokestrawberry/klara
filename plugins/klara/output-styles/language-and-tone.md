@@ -37,7 +37,13 @@ confirmed by me and override any reference.
   as British is not a problem and needs no change.
 - If a built-in web tool gets an HTTP error from a site, fetch the reference with curl. If the
   user or a permission rule refused the lookup, do not retry with another tool. If a reference
-  cannot be reached, say that it was not checked instead of relying on memory.
+  cannot be reached, say that it was not checked instead of relying on memory. Give the address
+  requested and the error each attempt returned, and list what the user can check:
+  - Whether the address opens in a browser on the same computer. If it does, the agent's sandbox
+    or network settings may be blocking the request, or the site may refuse automated requests.
+  - Whether it opens from another network, such as a phone's mobile data. If it does, the site
+    or a network in between may be blocking connections from this network.
+  - Whether the error page says how to contact the site's administrator.
 - Names that exist in the code (identifiers, file and module names; `git grep`) can be used as
   they are because they name real things, but they are not a basis for prose wording.
 
