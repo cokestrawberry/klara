@@ -174,11 +174,11 @@ Results are written to `plugins/klara/evals/results/`.
 ## Token usage
 
 The rules add input tokens to every session, and they can lead the agent to look words up before
-it answers. These figures were measured on 2026-10-01 at commit `c5058eb` with
+it answers. These figures were measured on 2026-10-02 at commit `0ab4d6f` with
 [scripts/token-usage/measure.ps1](scripts/token-usage/measure.ps1):
 
-- Claude Code 2.1.285 with `claude-sonnet-5-5`, run through `claude plugin eval`
-- Codex CLI 0.159.2 with `gpt-6-luna`, the default model of a free ChatGPT account, run through
+- Claude Code 2.1.287 with `claude-sonnet-5-5`, run through `claude plugin eval`
+- Codex CLI 0.160.0 with `gpt-6-luna`, the default model of a free ChatGPT account, run through
   `codex exec --json`
 
 The tasks are the eight cases in [plugins/klara/evals](plugins/klara/evals) and a
@@ -196,15 +196,16 @@ to a whole token:
 
 | Condition | Claude Code: eval cases | Claude Code: control | Codex: eval cases | Codex: control |
 | --- | ---: | ---: | ---: | ---: |
-| 1. No plugin | 20,918 | 21,851 | 38,832 | 27,002 |
-| 2. Plugin with web access | 23,738 | 24,334 | 71,354 | 29,065 |
-| 3. Plugin without web access | 23,690 | 24,310 | 58,117 | 29,832 |
+| 1. No plugin | 20,840 | 21,792 | 39,122 | 27,369 |
+| 2. Plugin with web access | 27,787 | 24,888 | 70,766 | 37,108 |
+| 3. Plugin without web access | 24,318 | 24,856 | 50,631 | 24,663 |
 
-No Claude Code run made a web request. In the eval cases, Codex searched the web under condition 2.
-Under condition 3 it ran shell commands that fetch pages from the reference sites instead, and
-every one failed to connect. It made no web request in the control task. Turning web search off
-also removes the web search tool from the request, so condition 3 differs from condition 2 by more
-than the requests.
+Claude Code made a web request in two runs, both in one eval case under condition 2: it fetched a
+reference page with `WebFetch`, and TTA answered one of the two requests with HTTP 400. Codex
+searched the web in the eval cases under condition 2. Under condition 3, two of its sixteen
+eval-case runs ran `curl` to fetch a page from 우리말샘 instead, and both requests failed. Neither
+tool made a web request in the control task. Turning web search off also removes the web search
+tool from the request, so condition 3 differs from condition 2 by more than the requests.
 
 `claude plugin details klara` reports `~0 tok` added to every session, and `/context` has no row
 for the output style, so neither shows what the rules add. The figures above come from the token
@@ -233,7 +234,7 @@ powershell -File scripts/token-usage/measure.ps1 -Agent codex -WorkRoot <dir> -R
 
 The script writes one row per run to `<dir>/<agent>-runs.csv`, including cached input tokens and
 the characters that web requests returned, and keeps each run's trace in `<dir>/traces/`. Every
-run calls the model on your account. The figures above come from Windows PowerShell 5.1.
+run calls the model on your account. The figures above come from PowerShell 7.6.6 on macOS.
 
 Codex runs every condition with the `config.toml`, plugins, and `AGENTS.md` in its
 [home directory](https://learn.chatgpt.com/docs/agent-configuration/agents-md) (`~/.codex` unless
