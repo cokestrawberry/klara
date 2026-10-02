@@ -43,6 +43,8 @@ confirmed by me and override any reference.
   can check:
   - Whether the address opens in a browser on the same computer. If it does, the agent's sandbox
     or network settings may be blocking the request, or the site may refuse automated requests.
+  - Whether it opens on another device on the same network, such as a phone on the same Wi-Fi.
+    If it does, this computer's settings may be blocking the connection.
   - Whether it opens from another network, such as a phone's mobile data. If it does, the site
     or a network in between may be blocking connections from this network.
   - Whether the error page says how to contact the site's administrator.
