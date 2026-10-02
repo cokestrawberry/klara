@@ -52,6 +52,46 @@ so text they write does not follow the rules.
 In Codex, the hook adds the rules as developer context when a session starts, resumes, is
 cleared, or is compacted. It does not run for subagents, which start with `SubagentStart` instead.
 
+## Chat apps
+
+The plugin's rules apply only in Claude Code and Codex. Claude chat and Cowork
+[ignore a plugin's output styles][platform-support], so adding klara there does not apply the
+rules. In the Claude and ChatGPT chat apps, paste the rules into the instructions that apply to
+every conversation instead:
+
+| App | Plans | File | Paste into |
+| --- | --- | --- | --- |
+| ChatGPT | Free, Go | [chat/light.md][light] | Custom instructions |
+| ChatGPT | Plus, Pro, Business, Enterprise, Edu | [chat/full.md][full] | Custom instructions |
+| Claude | All | [chat/light.md][light] | Instructions for Claude |
+| Claude | Team, Enterprise | [chat/light.md][light] | Organization instructions |
+
+- **Custom instructions**: in ChatGPT, open Settings > Personalization, turn on Enable
+  customization, and paste the file's contents into Custom instructions. In the iOS and Android
+  apps, open Settings > Customize ChatGPT instead.
+- **Instructions for Claude**: in Claude, open Settings > General. They
+  [apply to all of your conversations][claude-instructions].
+- **Organization instructions**: Owners and Primary Owners of a Team or Enterprise organization
+  can [apply the rules to everyone in the organization][org-instructions] from Organization
+  settings > Organization and access.
+
+ChatGPT [saves up to 1,500 characters][chatgpt-instructions] of custom instructions on Free and
+Go, and up to 5,000 on Plus, Pro, Business, Enterprise, and Edu. Claude's documentation gives no
+limit for Instructions for Claude, so the table uses the 1,500-character file there; organization
+instructions take up to 3,000 characters. The plans, limits, and settings above were checked on
+2026-10-02.
+
+`chat/full.md` holds the rules without the parts that apply only to Claude Code and Codex.
+`chat/light.md` shortens them further and leaves out the observed cases. The
+[evals](#evaluate) run only in Claude Code, so they do not score either file.
+
+[full]: chat/full.md
+[light]: chat/light.md
+[platform-support]: https://claude.com/docs/plugins/platform-support
+[claude-instructions]: https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features
+[org-instructions]: https://support.claude.com/en/articles/14546867-set-organization-instructions
+[chatgpt-instructions]: https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions
+
 ## References
 
 | When | Korean | English |
