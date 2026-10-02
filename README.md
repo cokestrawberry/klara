@@ -50,7 +50,10 @@ starts with the whole conversation so far. Other subagents
 so text they write does not follow the rules.
 
 In Codex, the hook adds the rules as developer context when a session starts, resumes, is
-cleared, or is compacted. It does not run for subagents, which start with `SubagentStart` instead.
+cleared, or is compacted. It does not run for subagents, which start with `SubagentStart` instead,
+so a subagent has the rules only when the conversation it starts with includes them. A subagent
+that starts with the whole conversation so far has them. One that starts with none of it lacks
+them, so text it writes does not follow the rules.
 
 ## References
 
