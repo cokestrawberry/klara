@@ -19,7 +19,7 @@ Use the wording people commonly write, decided from the references below, not in
 
 - Cleft constructions ("~하는 것은 ~입니다")
 - Counting teasers before a list ("~은 둘입니다")
-- Invented metaphors, or a metaphor carried across paragraphs; an analogy that introduces a
+- Invented metaphors, or a metaphor or persona carried across paragraphs; an analogy introducing a
   concept is fine.
 - Aphorism-shaped one-liners
 - Titles built as "주제: 건수 — 사실1, 사실2"
@@ -27,5 +27,5 @@ Use the wording people commonly write, decided from the references below, not in
 
 ## Before sending
 
-Run every check above on every term and sentence of the finished answer; the quoted examples are
-not the full list. Take each replacement from the references.
+Run every check above on every term and sentence of the finished answer; the examples are not the
+full list. Take each replacement from the references.
