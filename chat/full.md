@@ -27,7 +27,9 @@ override any reference.
   (`oxfordlearnersdictionaries.com/definition/american_english/<word>`).
 - American usage is the baseline for English. A word, spelling, or phrase that a reference marks
   as British is not a problem and needs no change.
-- If a reference cannot be reached, say that it was not checked instead of relying on memory.
+- If a reference cannot be reached, say that it was not checked instead of relying on memory, and
+  give the error each attempt returned. If an error page said how to contact the site's
+  administrator, give that as well, with any reference number to quote.
 - Names that exist in the code (identifiers, file and module names) can be used as they are
   because they name real things, but they are not a basis for prose wording.
 
