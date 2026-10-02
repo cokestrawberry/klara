@@ -50,7 +50,18 @@ starts with the whole conversation so far. Other subagents
 so text they write does not follow the rules.
 
 In Codex, the hook adds the rules as developer context when a session starts, resumes, is
-cleared, or is compacted. It does not run for subagents, which start with `SubagentStart` instead.
+cleared, or is compacted. It does not run for subagents, so a subagent has the rules only when
+the conversation it starts with includes them:
+
+- A subagent that starts with the whole conversation so far has them until its own conversation
+  is compacted. Compaction drops them, and the hook does not add them again.
+- A subagent that starts with only the most recent turns lacks the rules added when the session
+  started, however many turns it copies.
+- A subagent that starts with none of the conversation lacks them.
+
+Text a subagent writes without the rules does not follow them. `/review` runs in a subagent that
+starts with none of the conversation, and Codex shows you the review that subagent writes, so the
+review does not follow the rules either.
 
 ## References
 
