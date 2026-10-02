@@ -17,9 +17,8 @@ who wrote it cannot be verified. Decide from the sources below instead. The obse
 confirmed by me and override any reference.
 
 - In either language, use a term of art only when a reference defines it with the meaning of what
-  is actually happening: for IT terms, TTA 정보통신용어사전
-  (`terms.tta.or.kr/dictionary/searchList.do?keyword=<term>`) in Korean and SEVOCAB in English
-  (`pascal.computer.org/sev_display/search.action?term=<term>`), or the official
+  is actually happening: for IT terms, TTA 정보통신용어사전 (terms.tta.or.kr) in Korean and SEVOCAB
+  in English (`pascal.computer.org/sev_display/search.action?term=<term>`), or the official
   documentation of the technology in question for its own terms. Otherwise write the plain phrase
   for what is happening. (observed: `cutover` for a routine deployment)
 - Instead of a transliteration, use a plain Korean word with the same meaning: for an IT term as
@@ -27,22 +26,19 @@ confirmed by me and override any reference.
   use the English spelling. (observed: 잡 → 작업, 윈도우 → 구간; 나이틀리 → nightly, 스텁 → stub,
   어서션 → assertion)
 - For a general Korean word, collocation, or figure of speech, check the usage examples (용례) in
-  우리말샘 (`opendict.korean.go.kr/search/searchResult?query=<word>`), which records words as used
-  in everyday life, and in 표준국어대사전
-  (`stdict.korean.go.kr/search/searchResult.do?searchKeyword=<word>`) for the standard sense. When
-  the phrase is not used in that sense there, name the action instead; a dead metaphor in English
-  revives in translation and obscures the point. (observed: "변수의 은퇴" for retiring an unused
-  variable)
+  우리말샘 (opendict.korean.go.kr), which records words as used in everyday life, and in
+  표준국어대사전 (stdict.korean.go.kr) for the standard sense. When the phrase is not used in that
+  sense there, name the action instead; a dead metaphor in English revives in translation and
+  obscures the point. (observed: "변수의 은퇴" for retiring an unused variable)
 - For a general English word, collocation, or figure of speech, check the definition and the
   example sentences in the Oxford Advanced American Dictionary
   (`oxfordlearnersdictionaries.com/definition/american_english/<word>`).
 - American usage is the baseline for English. A word, spelling, or phrase that a reference marks
   as British is not a problem and needs no change.
-- If a built-in web tool gets an HTTP error from a site, fetch the reference with `curl -L`.
-  Apart from that fetch, do not try a failed lookup again with another tool or URL. If the user
-  or a permission rule refused the lookup, do not retry with another tool; a setting that turns
-  off web search counts as a refusal too. If the sandbox's network access is off, do not fetch a
-  reference with curl or any other shell command. If a reference cannot be reached, say
+- If a built-in web tool gets an HTTP error from a site, fetch the reference with `curl -L`. If the
+  user or a permission rule refused the lookup, do not retry with another tool; a setting that
+  turns off web search counts as a refusal too. If the sandbox's network access is off, do not
+  fetch a reference with curl or any other shell command. If a reference cannot be reached, say
   that it was not checked instead of relying on memory, and give the error each attempt returned.
   If an error page said how to contact the site's administrator, give that as well, with any
   reference number to quote. The first time a site cannot be reached in a conversation, also
