@@ -17,8 +17,9 @@ who wrote it cannot be verified. Decide from the sources below instead. The obse
 confirmed by me and override any reference.
 
 - In either language, use a term of art only when a reference defines it with the meaning of what
-  is actually happening: for IT terms, TTA 정보통신용어사전 (terms.tta.or.kr) in Korean and SEVOCAB
-  in English (`pascal.computer.org/sev_display/search.action?term=<term>`), or the official
+  is actually happening: for IT terms, TTA 정보통신용어사전
+  (`terms.tta.or.kr/dictionary/searchList.do?keyword=<term>`) in Korean and SEVOCAB in English
+  (`pascal.computer.org/sev_display/search.action?term=<term>`), or the official
   documentation of the technology in question for its own terms. Otherwise write the plain phrase
   for what is happening. (observed: `cutover` for a routine deployment)
 - Instead of a transliteration, use a plain Korean word with the same meaning: for an IT term as
