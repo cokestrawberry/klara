@@ -141,6 +141,7 @@ The rules record these replacements:
 | --- | --- | --- |
 | 잡, 윈도우 | 작업, 구간 | A plain Korean word instead of a transliteration |
 | 나이틀리, 스텁, 어서션 | nightly, stub, assertion | No Korean word, so the English spelling |
+| 감사 레코드 | 감사 로그의 한 줄 | No reference lists the compound, and 감사 로그 is the whole log |
 
 For these two, the rules record only the principle. The rewrites are illustrations of it,
 not output the eval checked:
@@ -181,8 +182,8 @@ it answers. These figures were measured on 2026-10-02 at commit `0ab4d6f` with
 - Codex CLI 0.160.0 with `gpt-6-luna`, the default model of a free ChatGPT account, run through
   `codex exec --json`
 
-The tasks are the eight cases in [plugins/klara/evals](plugins/klara/evals) and a
-[control task](scripts/token-usage/control/case.yaml) with no wording to choose: fixing a small
+The tasks are the eight cases that [plugins/klara/evals](plugins/klara/evals) held at that commit
+and a [control task](scripts/token-usage/control/case.yaml) with no wording to choose: fixing a small
 Python function. Each task ran under each of these conditions:
 
 1. No plugin.
