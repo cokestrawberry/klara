@@ -1,0 +1,18 @@
+schema_version: "1.1"
+name: compound-term
+description: A compound no reference lists, 감사 레코드, is not kept for one line of the audit log
+execution:
+  max_turns: 30
+  timeout_seconds: 600
+  prompt: |
+    아래 공지 초안을 팀 채널에 올릴 수 있게 다듬어 `result.md` 파일로 저장해 주세요.
+
+    > 로그인 실패 한 번에 감사 레코드가 두 개씩 쌓이던 문제 수정. `AuditRecord` 생성 위치를 한 곳으로 합침.
+graders:
+  - name: no-audit-record
+    type: regex
+    pattern: 감사 ?레코드
+    match: not_contains
+    target:
+      source: file
+      path: result.md

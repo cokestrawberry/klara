@@ -141,6 +141,7 @@ The rules record these replacements:
 | --- | --- | --- |
 | 잡, 윈도우 | 작업, 구간 | A plain Korean word instead of a transliteration |
 | 나이틀리, 스텁, 어서션 | nightly, stub, assertion | No Korean word, so the English spelling |
+| 감사 레코드 | 감사 로그의 한 줄 | No reference lists the compound, and 감사 로그 is the whole log |
 
 For these two, the rules record only the principle. The rewrites are illustrations of it,
 not output the eval checked:
