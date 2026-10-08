@@ -21,8 +21,9 @@ override any reference.
 - Look a multi-word term up as one unit. A compound that renders an English term part by part
   (from code, an English document, or an API name) does not pass because each part does; use it
   only when a reference lists the compound itself, otherwise use the term a reference gives for
-  the same thing or write the plain phrase. (observed: 감사 레코드 for a line of the audit log;
-  우리말샘 lists 감사 로그)
+  the same thing or write the plain phrase. (observed: 감사 레코드 for one line of the audit log,
+  which neither TTA nor 우리말샘 lists; 감사 로그 in 우리말샘 is the whole log, so write
+  감사 로그의 한 줄)
 - For a general Korean word, collocation, or figure of speech, check the usage examples (용례) in
   우리말샘 (opendict.korean.go.kr), which records words as used in everyday life, and in
   표준국어대사전 (stdict.korean.go.kr) for the standard sense. When the phrase is not used in that
