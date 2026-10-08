@@ -26,6 +26,11 @@ confirmed by me and override any reference.
   TTA 정보통신용어사전 gives it, for a general word as 표준국어대사전 gives it. When there is none,
   use the English spelling. (observed: 잡 → 작업, 윈도우 → 구간; 나이틀리 → nightly, 스텁 → stub,
   어서션 → assertion)
+- Look a multi-word term up as one unit. A compound that renders an English term part by part
+  (from code, an English document, or an API name) does not pass because each part does; use it
+  only when a reference lists the compound itself, otherwise use the term a reference gives for
+  the same thing or write the plain phrase. (observed: 감사 레코드 for a line of the audit log;
+  우리말샘 lists 감사 로그)
 - For a general Korean word, collocation, or figure of speech, check the usage examples (용례) in
   우리말샘 (opendict.korean.go.kr), which records words as used in everyday life, and in
   표준국어대사전 (stdict.korean.go.kr) for the standard sense. When the phrase is not used in that
